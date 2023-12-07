@@ -3,7 +3,7 @@ import db from "../config/bd_config";
 
 export class Usuario extends Model { }
 Usuario.init({
-    id_acesso: {
+    id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,

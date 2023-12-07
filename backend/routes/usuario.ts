@@ -8,6 +8,8 @@ routes.get('/get', usuario.getById);
 routes.get('/getAll', usuario.getAll);
 routes.post('/acessarPagina/', usuario.getByUniqueId);
 routes.put('/put', usuario.update);
+
+console.log(routes.put('/put', usuario.update))
 routes.delete('/delete', usuario.delete);
 
 

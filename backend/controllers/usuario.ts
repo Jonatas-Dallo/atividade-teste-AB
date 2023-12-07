@@ -29,7 +29,7 @@ export class ValorController {
 
     try {
       const valor = await Usuario.findOne({
-        where: { id_valor: id },
+        where: { id_acessou: id },
       });
       return res.json(valor);
     } catch (e) {
@@ -57,23 +57,24 @@ export class ValorController {
 
   // UPDATE
   async update(req: Request, res: Response) {
-    const { id } = req.body;
+    const { id_acesso } = req.body;
+    // const { id_acesso } = req.params;
 
     try {
       const [updated] = await Usuario.update(req.body, {
-        where: { id_valor: id },
+        where: { id_acesso: id_acesso },
       });
 
       if (updated) {
         const updatedValor = await Usuario.findOne({
-          where: { id_valor: id },
+          where: { id_acesso: id_acesso },
         });
         return res.json(updatedValor);
       }
 
       throw new Error("Valor not found");
     } catch (e) {
-      return res.status(500).json({ error: e });
+      console.log(e)
     }
   }
 

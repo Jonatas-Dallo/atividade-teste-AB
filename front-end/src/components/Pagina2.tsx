@@ -36,7 +36,7 @@ export default function Pagina2() {
                             Especificações
                         </h3>
                         <ul>
-                            <li><strong>Cor Cinza Estilosa:</strong> Design elegante e moderno que se destaca entre as opções de cores
+                            <li><strong>Cor Cinza Estilosa 2:</strong> Design elegante e moderno que se destaca entre as opções de cores
                                 tradicionais.</li>
                             <li><strong>Marcha Variável:</strong> Sistema de marchas que oferece versatilidade para diferentes tipos de
                                 terreno e níveis de dificuldade.</li>

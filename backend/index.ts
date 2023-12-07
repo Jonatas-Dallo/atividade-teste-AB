@@ -11,8 +11,17 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 
-// Configuração do CORS para permitir todas as origens (*), você pode personalizar isso conforme necessário.
 app.use(cors());
+
+db.sync().then(async () => {
+  console.log('Banco de dados sincronizado.');
+
+  app.listen(PORT, () => {
+      console.log(`Rodando na porta http://localhost:${PORT}/`);
+  });
+}).catch((err) => {
+  console.error('Erro ao sincronizar o banco de dados:', err);
+});
 
 const transporter = nodemailer.createTransport({
     host : 'smtp-mail.outlook.com',
@@ -28,7 +37,6 @@ app.post('/enviar-email', async (req, res) => {
     const { destinatario, assunto, corpo } = req.body;
   
     try {
-      // Enviar e-mail
       await transporter.sendMail({
         from: 'Loja de bicicletas <jonatasDallo@hotmail.com>',
         to: destinatario,
@@ -43,17 +51,5 @@ app.post('/enviar-email', async (req, res) => {
     }
   });
 
-
-db.sync().then(async () => {
-    console.log('Banco de dados sincronizado.');
-
-    app.listen(PORT, () => {
-        console.log(`Rodando na porta http://localhost:${PORT}/`);
-    });
-}).catch((err) => {
-    console.error('Erro ao sincronizar o banco de dados:', err);
-});
-
 app.use('/', routes);
 
-// Certifique-se de que suas rotas estejam definidas corretamente em 'routes'.

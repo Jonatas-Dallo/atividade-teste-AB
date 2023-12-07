@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-// const db = new Sequelize('atividadeAB', 'root', 'root', {
+// const db = new Sequelize('atividade', 'root', 'root', {
 //     host: 'localhost',
 //     dialect: 'mysql',
 //     logging: true
