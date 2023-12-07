@@ -11,7 +11,7 @@ export default function Cadastro() {
 
   const handleCadastro = async () => {
     try {
-      // Enviar dados para o backend
+
       await axios.post('http://localhost:3001/usuario/post', {
         email: email,
         variante: variante,
@@ -31,7 +31,7 @@ export default function Cadastro() {
       console.log(response)
 
       window.alert('Cadastro realizado com sucesso!');
-      // Limpar os campos após o cadastro
+
       setEmail('');
       setVariante('');
     } catch (error) {

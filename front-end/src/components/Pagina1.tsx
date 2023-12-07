@@ -14,7 +14,7 @@ export default function Pagina1() {
     const id = location.pathname.replace('/bicicleta/', '');
 
     useEffect(() => {
-        // Verifica se o cookie acessouAnterior existe
+
         const acessouAnterior = Cookies.get('acessouAnterior');
 
 
@@ -31,7 +31,7 @@ export default function Pagina1() {
                         console.error('Erro ao atualizar:', putError);
                     });
 
-                    Cookies.set('acessouAnterior', 'true', { expires: 1 }); // Pode ajustar o tempo de expiração conforme necessário
+                    Cookies.set('acessouAnterior', 'true', { expires: 1/3 }); 
                 }
             }).catch((error) => {
                 console.error('Erro na chamada da API:', error);
@@ -53,7 +53,7 @@ export default function Pagina1() {
 
                 if (!compraAnterior) {
                     axios.put(`http://localhost:3001/usuario/put`, { id: usuarioEncontrado.id, comprou: soma })
-                    Cookies.set('compraAnterior', 'true', { expires: 1 });
+                    Cookies.set('compraAnterior', 'true', { expires: 1/3 });
                 }
 
 
