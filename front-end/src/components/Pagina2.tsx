@@ -6,15 +6,15 @@ export default function Pagina2() {
         
         const confirmacao = window.confirm("Deseja confirmar a compra?");
 
-        if (confirmacao) {
-            axios.post('http://localhost:3001/compra/post', {
-                confirmação: true,
-                paginaVersion: "v2",
-            });
-            window.alert("Compra realizada com sucesso!");
-        } else {
-            window.alert("Compra cancelada.");
-        }
+        // if (confirmacao) {
+        //     axios.post('http://localhost:3001/compra/post', {
+        //         confirmação: true,
+        //         paginaVersion: "v2",
+        //     });
+        //     window.alert("Compra realizada com sucesso!");
+        // } else {
+        //     window.alert("Compra cancelada.");
+        // }
     };
     
     return (

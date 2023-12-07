@@ -17,8 +17,7 @@ export default function Intermediario() {
     const id = location.pathname.replace('/bicicleta/', '');
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            axios.get(`http://localhost:3001/usuario/getAll`).then((response) => {
+            axios.get(`http://40.76.110.239:3001/usuario/getAll`).then((response) => {
                 const usuarioEncontrado = response.data.find((user: Usuario) => user.id_unico === id);
 
                 if (usuarioEncontrado) {
@@ -28,10 +27,8 @@ export default function Intermediario() {
             }).catch((error) => {
                 console.error('Erro na chamada da API:', error);
             });
-        }, 100);
 
         // Limpando o intervalo quando o componente é desmontado ou quando a dependência 'id' muda
-        return () => clearInterval(interval);
 
     }, []);
 

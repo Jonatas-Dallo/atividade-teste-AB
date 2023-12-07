@@ -48,7 +48,7 @@ db.sync().then(async () => {
     console.log('Banco de dados sincronizado.');
 
     app.listen(PORT, () => {
-        console.log(`Rodando na porta http://localhost:${PORT}/`);
+        console.log(`Rodando na porta http://40.76.110.239/:${PORT}/`);
     });
 }).catch((err) => {
     console.error('Erro ao sincronizar o banco de dados:', err);

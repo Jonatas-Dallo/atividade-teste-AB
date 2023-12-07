@@ -12,7 +12,7 @@ export default function Cadastro() {
   const handleCadastro = async () => {
     try {
       // Enviar dados para o backend
-      await axios.post('http://localhost:3001/usuario/post', {
+      await axios.post('http://40.76.110.239:3001/usuario/post', {
         email: email,
         variante: variante,
         id_unico: id_unico,
@@ -24,10 +24,10 @@ export default function Cadastro() {
       
 
       // Enviar e-mail com o link
-      const response = await axios.post('http://localhost:3001/enviar-email', {
+      const response = await axios.post('http://40.76.110.239:3001/enviar-email', {
         destinatario: email,
         assunto: 'Acesse nossa página e veja nossa bicicleta',
-        corpo: `Acesse: http://localhost:3000/bicicleta/${id_unico}`,
+        corpo: `Acesse: http://40.76.110.239:3002/bicicleta/${id_unico} ou http://localhost:3000/bicicleta/${id_unico}`,
       });
 
       console.log(response)
