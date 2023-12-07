@@ -1,0 +1,105 @@
+  #principal {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  #container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  li {
+    text-align: left;
+    margin-bottom: 0.5vw;
+  }
+  
+  #produto {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  #produto img {
+    max-width: 30vw;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  #botao-comprar {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #botao-comprar:hover {
+    background-color: #45a049;
+  }
+  
+  #preco {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  #texto {
+    font-size: 1.5vw;
+  } 
+
+  #caix-especificacoes {
+    margin: 2vw;
+  }
+  
+  .containerCadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .formContainer {
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+  }
+  
+  .input {
+    margin: 10px 0;
+    padding: 8px;
+    width: 100%;
+  }
+  
+  .varianteContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .dropdown {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+  }
+  
+  .button {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    margin-top: 10px;
+  }
