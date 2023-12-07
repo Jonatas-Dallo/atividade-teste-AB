@@ -22,15 +22,13 @@ export default function Cadastro() {
 
       console.log(email);
       
+      const response = await axios.post('http://localhost:3001/enviar-email', {
+        destinatario: email,
+        assunto: 'Acesse nossa página e veja nossa bicicleta',
+        corpo: `Acesse: http://40.76.110.239:3002/bicicleta/${id_unico} ou http://localhost:3000/bicicleta/${id_unico}`,
+      });
 
-      // Enviar e-mail com o link
-      // const response = await axios.post('http://40.76.110.239:3001/enviar-email', {
-      //   destinatario: email,
-      //   assunto: 'Acesse nossa página e veja nossa bicicleta',
-      //   corpo: `Acesse: http://40.76.110.239:3002/bicicleta/${id_unico} ou http://localhost:3000/bicicleta/${id_unico}`,
-      // });
-
-      // console.log(response)
+      console.log(response)
 
       window.alert('Cadastro realizado com sucesso!');
       // Limpar os campos após o cadastro

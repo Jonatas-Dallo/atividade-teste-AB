@@ -11,7 +11,6 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 
-// Configuração do CORS para permitir todas as origens (*), você pode personalizar isso conforme necessário.
 app.use(cors());
 
 const transporter = nodemailer.createTransport({
@@ -28,7 +27,6 @@ app.post('/enviar-email', async (req, res) => {
     const { destinatario, assunto, corpo } = req.body;
   
     try {
-      // Enviar e-mail
       await transporter.sendMail({
         from: 'Loja de bicicletas <jonatasDallo@hotmail.com>',
         to: destinatario,
@@ -55,5 +53,3 @@ db.sync().then(async () => {
 });
 
 app.use('/', routes);
-
-// Certifique-se de que suas rotas estejam definidas corretamente em 'routes'.
