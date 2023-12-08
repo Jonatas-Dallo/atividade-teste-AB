@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./index.css";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { useRota } from "../Context/RotaContext";
+import Cookies from 'js-cookie';
 
 interface Usuario {
     id_unico: string;
@@ -10,33 +10,56 @@ interface Usuario {
 }
 
 export default function Pagina1() {
-    const [usuario, setUsuario] = useState('');
     const location = useLocation();
     const id = location.pathname.replace('/bicicleta/', '');
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/usuario/getAll`).then((response) => {
-            const usuarioEncontrado = response.data.find((user: Usuario) => user.id_unico === id);
-    
-            if (usuarioEncontrado) {
-                console.log("usuarioEncontrado", usuarioEncontrado);
-                setUsuario(usuarioEncontrado);
-    
-                axios.put(`http://localhost:3001/usuario/put`, { id: usuarioEncontrado.id_acesso }).then((putResponse) => {
-                    console.log('Atualizado com sucesso:', putResponse.data);
-                }).catch((putError) => {
-                    console.error('Erro ao atualizar:', putError);
-                });
-            }
-        }).catch((error) => {
-            console.error('Erro na chamada da API:', error);
-        });
+
+        const acessouAnterior = Cookies.get('acessouAnterior');
+
+
+        if (!acessouAnterior) {
+            axios.get(`http://localhost:3001/usuario/getAll`).then((response) => {
+                const usuarioEncontrado = response.data.find((user: Usuario) => user.id_unico === id);
+
+                if (usuarioEncontrado) {
+                    let soma = usuarioEncontrado.acessou + 1;
+
+                    axios.put(`http://localhost:3001/usuario/put`, { id: usuarioEncontrado.id, acessou: soma }).then((putResponse) => {
+                        console.log('Atualizado com sucesso:', putResponse.data);
+                    }).catch((putError) => {
+                        console.error('Erro ao atualizar:', putError);
+                    });
+
+                    Cookies.set('acessouAnterior', 'true', { expires: 1/3 }); 
+                }
+            }).catch((error) => {
+                console.error('Erro na chamada da API:', error);
+            });
+        }
     }, []);
 
     const handleCompra = () => {
 
+        const compraAnterior = Cookies.get('compraAnterior');
+
         const confirmacao = window.confirm("Deseja confirmar a compra?");
 
+        if (confirmacao) {
+            axios.get(`http://localhost:3001/usuario/getAll`).then((response) => {
+                const usuarioEncontrado = response.data.find((user: Usuario) => user.id_unico === id);
+
+                const soma = usuarioEncontrado.comprou + 1;
+
+                if (!compraAnterior) {
+                    axios.put(`http://localhost:3001/usuario/put`, { id: usuarioEncontrado.id, comprou: soma })
+                    Cookies.set('compraAnterior', 'true', { expires: 1/3 });
+                }
+
+
+                window.alert('Compra realizada com sucesso!');
+            })
+        }
     };
 
     return (
@@ -54,7 +77,7 @@ export default function Pagina1() {
                         também é um compromisso com a preservação do meio ambiente. Junte-se a nós nessa jornada e faça parte da
                         mudança pedalando em direção a um futuro mais sustentável e saudável para todos.
                     </p>
-                    <img src="https://blog.bikeregistrada.com.br/wp-content/uploads/2023/08/Porsche2.jpeg" alt="Bicicleta" />
+                    <img src="https://static3.tcdn.com.br/img/img_prod/394779/bicicleta_eletrica_29_gts_m1_freio_a_disco_7v_shimano_suspensao_e_bike_draven_190w_3385_1_86d1b90ceb3dbd4dd276a6155ee27655.jpg" alt="Bicicleta" />
                     <h2>Bicicleta V235 Cinza</h2>
                     <p>Uma bicicleta de marcha e banco ajustável para suas necessidades.</p>
                     <p id="preco">R$ 1.999,00</p>

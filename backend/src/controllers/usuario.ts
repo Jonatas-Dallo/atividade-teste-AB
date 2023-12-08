@@ -29,7 +29,7 @@ export class ValorController {
 
     try {
       const valor = await Usuario.findOne({
-        where: { id_valor: id },
+        where: { id: id },
       });
       return res.json(valor);
     } catch (e) {
@@ -61,12 +61,12 @@ export class ValorController {
 
     try {
       const [updated] = await Usuario.update(req.body, {
-        where: { id_valor: id },
+        where: { id: id },
       });
 
       if (updated) {
         const updatedValor = await Usuario.findOne({
-          where: { id_valor: id },
+          where: { id: id },
         });
         return res.json(updatedValor);
       }

@@ -8,7 +8,6 @@ import axios from 'axios';
 interface Usuario {
   id_unico: string;
   variante: string;
-  // outras propriedades
 }
 
 export default function Intermediario() {

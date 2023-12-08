@@ -1,22 +1,66 @@
+import { useEffect } from "react";
 import "./index.css";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+import Cookies from 'js-cookie';
+
+interface Usuario {
+    id_unico: string;
+    variante: string;
+}
 
 export default function Pagina2() {
+    const location = useLocation();
+    const id = location.pathname.replace('/bicicleta/', '');
+
+    useEffect(() => {
+
+        const acessouAnterior = Cookies.get('acessouAnterior');
+
+
+        if (!acessouAnterior) {
+            axios.get(`http://localhost:3001/usuario/getAll`).then((response) => {
+                const usuarioEncontrado = response.data.find((user: Usuario) => user.id_unico === id);
+
+                if (usuarioEncontrado) {
+                    let soma = usuarioEncontrado.acessou + 1;
+
+                    axios.put(`http://localhost:3001/usuario/put`, { id: usuarioEncontrado.id, acessou: soma }).then((putResponse) => {
+                        console.log('Atualizado com sucesso:', putResponse.data);
+                    }).catch((putError) => {
+                        console.error('Erro ao atualizar:', putError);
+                    });
+
+                    Cookies.set('acessouAnterior', 'true', { expires: 1/3 }); 
+                }
+            }).catch((error) => {
+                console.error('Erro na chamada da API:', error);
+            });
+        }
+    }, []);
+
     const handleCompra = () => {
-        
+
+        const compraAnterior = Cookies.get('compraAnterior');
+
         const confirmacao = window.confirm("Deseja confirmar a compra?");
 
-        // if (confirmacao) {
-        //     axios.post('http://localhost:3001/compra/post', {
-        //         confirmação: true,
-        //         paginaVersion: "v2",
-        //     });
-        //     window.alert("Compra realizada com sucesso!");
-        // } else {
-        //     window.alert("Compra cancelada.");
-        // }
+        if (confirmacao) {
+            axios.get(`http://localhost:3001/usuario/getAll`).then((response) => {
+                const usuarioEncontrado = response.data.find((user: Usuario) => user.id_unico === id);
+
+                const soma = usuarioEncontrado.comprou + 1;
+
+                if (!compraAnterior) {
+                    axios.put(`http://localhost:3001/usuario/put`, { id: usuarioEncontrado.id, comprou: soma })
+                    Cookies.set('compraAnterior', 'true', { expires: 1/3 });
+                }
+
+                window.alert('Compra realizada com sucesso!');
+            })
+        }
     };
-    
+
     return (
         <div id="principal">
             <div id="container">
