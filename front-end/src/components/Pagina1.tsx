@@ -46,13 +46,13 @@ export default function Pagina1() {
         const confirmacao = window.confirm("Deseja confirmar a compra?");
 
         if (confirmacao) {
-            axios.get(`http://localhost:3001/usuario/getAll`).then((response) => {
+            axios.get(`http://40.76.110.239:3001/usuario/getAll`).then((response) => {
                 const usuarioEncontrado = response.data.find((user: Usuario) => user.id_unico === id);
 
                 const soma = usuarioEncontrado.comprou + 1;
 
                 if (!compraAnterior) {
-                    axios.put(`http://localhost:3001/usuario/put`, { id: usuarioEncontrado.id, comprou: soma })
+                    axios.put(`http://40.76.110.239:3001/usuario/put`, { id: usuarioEncontrado.id, comprou: soma })
                     Cookies.set('compraAnterior', 'true', { expires: 1/3 });
                 }
 
