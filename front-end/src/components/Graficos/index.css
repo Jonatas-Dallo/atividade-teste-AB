@@ -1,0 +1,9 @@
+#bloco-grafico {
+    padding: 5px;
+}
+
+#titulo {
+    font-size: 4vw;
+    color: rgb(1, 59, 59);
+    align-items: center;
+}
