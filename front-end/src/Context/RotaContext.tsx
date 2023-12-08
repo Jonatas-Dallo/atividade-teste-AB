@@ -5,18 +5,18 @@ const RotaContext = createContext({} as PropsRota);
 
 export function RotaProvider({ children }:any) {
   const [rotaAtual, setRotaAtual] = useState('');
-  const [pagina, setPagina] = useState(true);
+  const [grafico, setGrafico] = useState();
 
   const setNovaRota = (novaRota:any) => {
     setRotaAtual(novaRota);
   };
 
-  const setPaginaAtual = (novaRota:any) => {
-    setPagina(novaRota);
+  const setGraficoTaxa = (novaRota:any) => {
+    setGrafico(novaRota);
   };
 
   return (
-    <RotaContext.Provider value={{ rotaAtual, setNovaRota, pagina, setPaginaAtual }}>
+    <RotaContext.Provider value={{ rotaAtual, setNovaRota, grafico, setGrafico, setGraficoTaxa }}>
       {children}
     </RotaContext.Provider>
   );

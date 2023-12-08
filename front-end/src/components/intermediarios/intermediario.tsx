@@ -11,12 +11,12 @@ interface Usuario {
 }
 
 export default function Intermediario() {
-    const { rotaAtual, setNovaRota, setPaginaAtual } = useRota();
+    const { rotaAtual, setNovaRota } = useRota();
     const location = useLocation();
     const id = location.pathname.replace('/bicicleta/', '');
 
     useEffect(() => {
-            axios.get(`http://localhost:3001/usuario/getAll`).then((response) => {
+            axios.get(`http://40.76.110.239:3001/usuario/getAll`).then((response) => {
                 const usuarioEncontrado = response.data.find((user: Usuario) => user.id_unico === id);
 
                 if (usuarioEncontrado) {

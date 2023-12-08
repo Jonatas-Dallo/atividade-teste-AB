@@ -1,10 +1,17 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { useRota } from '../../Context/RotaContext';
 
 const Graficov2 = () => {
+  const { grafico } = useRota();
+
+  if (!grafico || !grafico.variante2) {
+    return <div>Carregando...</div>;
+  }
+
   const data = [
-    { name: 'Acessos', valor: 65 },
-    { name: 'Compras', valor: 59 },
+    { name: 'Acessos', valor: grafico.variante2.totalAcessou },
+    { name: 'Compras', valor: grafico.variante2.totalComprou },
   ];
 
   return (

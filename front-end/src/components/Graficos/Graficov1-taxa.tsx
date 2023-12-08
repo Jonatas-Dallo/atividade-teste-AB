@@ -2,7 +2,7 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useRota } from '../../Context/RotaContext';
 
-const Graficov1 = () => {
+const Graficov1Taxa = () => {
   const { grafico } = useRota();
 
   if (!grafico || !grafico.variante1) {
@@ -10,20 +10,19 @@ const Graficov1 = () => {
   }
 
   const data = [
-    { name: 'Acessos', valor: grafico.variante1.totalAcessou },
-    { name: 'Compras', valor: grafico.variante1.totalComprou },
+    { valor: grafico.varianteTaxa1 },
   ];
 
   return (
     <BarChart width={600} height={300} data={data}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
-      <YAxis />
+      <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
       <Tooltip />
       <Legend />
-      <Bar dataKey="valor" fill="rgba(75,192,192,1)" />
+      <Bar dataKey="valor" fill="rgb(144, 238, 144)" />
     </BarChart>
   );
 };
 
-export default Graficov1;
+export default Graficov1Taxa;

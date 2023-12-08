@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import "./index.css";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -19,13 +19,13 @@ export default function Pagina1() {
 
 
         if (!acessouAnterior) {
-            axios.get(`http://localhost:3001/usuario/getAll`).then((response) => {
+            axios.get(`http://40.76.110.239:3001/usuario/getAll`).then((response) => {
                 const usuarioEncontrado = response.data.find((user: Usuario) => user.id_unico === id);
 
                 if (usuarioEncontrado) {
                     let soma = usuarioEncontrado.acessou + 1;
 
-                    axios.put(`http://localhost:3001/usuario/put`, { id: usuarioEncontrado.id, acessou: soma }).then((putResponse) => {
+                    axios.put(`http://40.76.110.239:3001/usuario/put`, { id: usuarioEncontrado.id, acessou: soma }).then((putResponse) => {
                         console.log('Atualizado com sucesso:', putResponse.data);
                     }).catch((putError) => {
                         console.error('Erro ao atualizar:', putError);

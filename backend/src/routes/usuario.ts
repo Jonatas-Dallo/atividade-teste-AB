@@ -9,6 +9,7 @@ routes.get('/getAll', usuario.getAll);
 routes.post('/acessarPagina/', usuario.getByUniqueId);
 routes.put('/put', usuario.update);
 routes.delete('/delete', usuario.delete);
+routes.get('/taxa', usuario.Taxa);
 
 
 routes.use((_: Request, res: Response) => res.json({ error: "Requisição desconhecida" }));

@@ -7,3 +7,9 @@
     color: rgb(1, 59, 59);
     align-items: center;
 }
+
+#grafico {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

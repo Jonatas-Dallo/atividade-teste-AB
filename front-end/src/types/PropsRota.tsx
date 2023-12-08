@@ -1,6 +1,7 @@
-export interface PropsRota{
+export interface PropsRota {
     rotaAtual: any;
     setNovaRota: any;
-    pagina: any;
-    setPaginaAtual: any;
-}
+    grafico: any;
+    setGrafico: any; 
+    setGraficoTaxa: any; 
+  }

@@ -3,6 +3,58 @@ import { Request, Response } from "express";
 
 export class ValorController {
 
+  async Taxa(req: Request, res: Response) {
+    try {
+      const usuariosVariante1 = await Usuario.findAll({
+        where: {
+          variante: 'variante1'
+        }
+      });
+  
+      const usuariosVariante2 = await Usuario.findAll({
+        where: {
+          variante: 'variante2'
+        }
+      });
+  
+      function calcularTotais(usuarios: any) {
+        let totalAcessou = 0;
+        let totalComprou = 0;
+  
+        for (const usuario of usuarios) {
+          totalAcessou += usuario.acessou || 0;
+          totalComprou += usuario.comprou || 0;
+        }
+  
+        return { totalAcessou, totalComprou };
+      }
+  
+      function calcularTaxaDeConversao({ totalAcessou, totalComprou }: { totalAcessou: number, totalComprou: number }) {
+      const percentualAcessou = 100; 
+
+      const taxa = (totalComprou * percentualAcessou) / totalAcessou;
+
+      return taxa.toFixed(2);
+      }
+  
+      const totalVariante1 = calcularTotais(usuariosVariante1);
+      const totalVariante2 = calcularTotais(usuariosVariante2);
+  
+      const taxaVariante1 = calcularTaxaDeConversao(totalVariante1);
+      const taxaVariante2 = calcularTaxaDeConversao(totalVariante2);
+  
+      return res.json({
+        variante1: totalVariante1,
+        varianteTaxa1: taxaVariante1,
+        variante2: totalVariante2,
+        varianteTaxa2: taxaVariante2
+      });
+    } catch (e) {
+      return res.status(500).json({ error: "Cannot get all Valors" });
+    }
+  }
+  
+
   // CREATE
   async create(req: Request, res: Response) {
     try {
@@ -10,7 +62,7 @@ export class ValorController {
 
       return res.json(valor);
     } catch (e) {
-      return res.status(500).json({ error: "Cannot create Valor" + e});
+      return res.status(500).json({ error: "Cannot create Valor" + e });
     }
   }
 
@@ -39,12 +91,12 @@ export class ValorController {
 
   async getByUniqueId(req: Request, res: Response) {
     const { id_unico } = req.body;
-  
+
     try {
       const usuario = await Usuario.findOne({
         where: { id_unico: id_unico },
       });
-  
+
       if (usuario) {
         return res.json(usuario);
       } else {
